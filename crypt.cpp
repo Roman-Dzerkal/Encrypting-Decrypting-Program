@@ -1,49 +1,49 @@
 #include "StdAfx.h"
-#include <ctype.h>	 // Для работы с функциями tolower() и toupper()
-#include <locale.h>	 // Подключаем русскую локализацию текста в файле-исходнике
+#include <ctype.h>	 // Р”Р»СЏ СЂР°Р±РѕС‚С‹ СЃ С„СѓРЅРєС†РёСЏРјРё tolower() Рё toupper()
+#include <locale.h>	 // РџРѕРґРєР»СЋС‡Р°РµРј СЂСѓСЃСЃРєСѓСЋ Р»РѕРєР°Р»РёР·Р°С†РёСЋ С‚РµРєСЃС‚Р° РІ С„Р°Р№Р»Рµ-РёСЃС…РѕРґРЅРёРєРµ
 #include "crypt.h"
 
 FILE *source, *_source, *Ckey, *CCrypt, *CDecrypt;
 
 crypt::crypt()
 {
-	source = fopen("C:\\Users\\Roma\\Desktop\\text.txt", "r");		 // Файл-исходник
-	_source = fopen("C:\\Users\\Roma\\Desktop\\text_.txt", "w+");	 // Промежуточный файл
-	Ckey = fopen("C:\\Users\\Roma\\Desktop\\key.txt", "w+");		 // Файл с ключём
-	CCrypt = fopen("C:\\Users\\Roma\\Desktop\\crypt.txt", "w+");	 // Файл с зашифрованым текстом
-	CDecrypt = fopen("C:\\Users\\Roma\\Desktop\\decrypt.txt", "w+"); // Файл с расшифрованым текстом
+	source = fopen("C:\\Users\\Roma\\Desktop\\text.txt", "r");		 // Р¤Р°Р№Р»-РёСЃС…РѕРґРЅРёРє
+	_source = fopen("C:\\Users\\Roma\\Desktop\\text_.txt", "w+");	 // РџСЂРѕРјРµР¶СѓС‚РѕС‡РЅС‹Р№ С„Р°Р№Р»
+	Ckey = fopen("C:\\Users\\Roma\\Desktop\\key.txt", "w+");		 // Р¤Р°Р№Р» СЃ РєР»СЋС‡С‘Рј
+	CCrypt = fopen("C:\\Users\\Roma\\Desktop\\crypt.txt", "w+");	 // Р¤Р°Р№Р» СЃ Р·Р°С€РёС„СЂРѕРІР°РЅС‹Рј С‚РµРєСЃС‚РѕРј
+	CDecrypt = fopen("C:\\Users\\Roma\\Desktop\\decrypt.txt", "w+"); // Р¤Р°Р№Р» СЃ СЂР°СЃС€РёС„СЂРѕРІР°РЅС‹Рј С‚РµРєСЃС‚РѕРј
 }
 
 crypt::~crypt()
 {
-	fcloseall; // Закрываем все потоки
+	fcloseall; // Р—Р°РєСЂС‹РІР°РµРј РІСЃРµ РїРѕС‚РѕРєРё
 }
 
 void crypt::setKeyToLowReg(int Length, char *M)
 {
 	for (int i = 0; i < Length; i++) {
-        fprintf(Ckey, "%c", (char)tolower(M[i])); //Переводим символы ключа в нижний регистр
+        fprintf(Ckey, "%c", (char)tolower(M[i])); //РџРµСЂРµРІРѕРґРёРј СЃРёРјРІРѕР»С‹ РєР»СЋС‡Р° РІ РЅРёР¶РЅРёР№ СЂРµРіРёСЃС‚СЂ
     }
 }
 
 int crypt::FindLengthFile()
 {
-    fseek(source, 0, SEEK_END); // Устанавливаем позицию индикатора-указателя в конец файла
-    int lSize = ftell(source);	// Считываем позицию индикатора-указателя
-    fseek(source, 0, SEEK_SET); // Устанавливаем позицию индикатора-указателя в начало файла
+    fseek(source, 0, SEEK_END); // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј РїРѕР·РёС†РёСЋ РёРЅРґРёРєР°С‚РѕСЂР°-СѓРєР°Р·Р°С‚РµР»СЏ РІ РєРѕРЅРµС† С„Р°Р№Р»Р°
+    int lSize = ftell(source);	// РЎС‡РёС‚С‹РІР°РµРј РїРѕР·РёС†РёСЋ РёРЅРґРёРєР°С‚РѕСЂР°-СѓРєР°Р·Р°С‚РµР»СЏ
+    fseek(source, 0, SEEK_SET); // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј РїРѕР·РёС†РёСЋ РёРЅРґРёРєР°С‚РѕСЂР°-СѓРєР°Р·Р°С‚РµР»СЏ РІ РЅР°С‡Р°Р»Рѕ С„Р°Р№Р»Р°
 	return lSize;
 }
 
 int crypt::ReadFile(char* Array, int FileLength)
 {
-	const int k = fread(Array, 1, FileLength, source); // Возвращает k успешно прочитаных байт из файла
+	const int k = fread(Array, 1, FileLength, source); // Р’РѕР·РІСЂР°С‰Р°РµС‚ k СѓСЃРїРµС€РЅРѕ РїСЂРѕС‡РёС‚Р°РЅС‹С… Р±Р°Р№С‚ РёР· С„Р°Р№Р»Р°
 	return k;
 }
 
 void crypt::setStringToUpperReg(int Len, char* Array)
 {
    for (int i = 0; i < Len; i++) {
-        fprintf(_source, "%c", (char)toupper(Array[i])); // Переводим исходный текст в верхний регистр
+        fprintf(_source, "%c", (char)toupper(Array[i])); // РџРµСЂРµРІРѕРґРёРј РёСЃС…РѕРґРЅС‹Р№ С‚РµРєСЃС‚ РІ РІРµСЂС…РЅРёР№ СЂРµРіРёСЃС‚СЂ
     }
 }
 
@@ -52,10 +52,10 @@ void crypt::Encrypting(int FileLength, int KeyLength, char* Array, char* Key)
 	for (int i = 0, j = 0; i < FileLength; i++) { 
         Array[i] ^= Key[j]; // Array[i] = Array[i] ^ Key[j]
 
-		j < KeyLength - 1 ? j++ : j = 0; // Условие цикличности ключа
+		j < KeyLength - 1 ? j++ : j = 0; // РЈСЃР»РѕРІРёРµ С†РёРєР»РёС‡РЅРѕСЃС‚Рё РєР»СЋС‡Р°
 
         fputc(Array[i], CCrypt); 
-		// Записываем шифросимвол в файл crypt.txt
+		// Р—Р°РїРёСЃС‹РІР°РµРј С€РёС„СЂРѕСЃРёРјРІРѕР» РІ С„Р°Р№Р» crypt.txt
     }
 }
 
@@ -67,6 +67,6 @@ void crypt::Decrypting(int FileLength, int KeyLength, char* Array, char* Key)
 		j < KeyLength - 1 ? j++ : j = 0;
 
         fprintf(CDecrypt, "%c", (char)toupper(Array[i]));
-		// Записываем расшифрованый символ в decrypt.txt
+		// Р—Р°РїРёСЃС‹РІР°РµРј СЂР°СЃС€РёС„СЂРѕРІР°РЅС‹Р№ СЃРёРјРІРѕР» РІ decrypt.txt
     }
 }

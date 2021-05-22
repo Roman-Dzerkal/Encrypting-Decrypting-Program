@@ -2,12 +2,12 @@
 class crypt
 {
 public:
-	int FindLengthFile(); // Находим длину файла
-	void setKeyToLowReg(int Length, char *Key); // Переводим ключ в нижний регистр
-	void setStringToUpperReg(int Length, char* Array); // Переводим начальный текст в верхний регистр
-	int ReadFile(char* Array, int FileLength); // Считываем текст, для шифрования
-	void Encrypting(int FileLength, int KeyLength, char* Array, char* Key); // Шифруем
-	void Decrypting(int FileLength, int KeyLength, char* Array, char* Key); // Дешифруем
+	int FindLengthFile(); // РќР°С…РѕРґРёРј РґР»РёРЅСѓ С„Р°Р№Р»Р°
+	void setKeyToLowReg(int Length, char *Key); // РџРµСЂРµРІРѕРґРёРј РєР»СЋС‡ РІ РЅРёР¶РЅРёР№ СЂРµРіРёСЃС‚СЂ
+	void setStringToUpperReg(int Length, char* Array); // РџРµСЂРµРІРѕРґРёРј РЅР°С‡Р°Р»СЊРЅС‹Р№ С‚РµРєСЃС‚ РІ РІРµСЂС…РЅРёР№ СЂРµРіРёСЃС‚СЂ
+	int ReadFile(char* Array, int FileLength); // РЎС‡РёС‚С‹РІР°РµРј С‚РµРєСЃС‚, РґР»СЏ С€РёС„СЂРѕРІР°РЅРёСЏ
+	void Encrypting(int FileLength, int KeyLength, char* Array, char* Key); // РЁРёС„СЂСѓРµРј
+	void Decrypting(int FileLength, int KeyLength, char* Array, char* Key); // Р”РµС€РёС„СЂСѓРµРј
 	crypt();
 	~crypt();	
 };
